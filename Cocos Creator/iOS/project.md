@@ -104,3 +104,13 @@ set_target_properties(${EXECUTABLE_NAME} PROPERTIES
 ```
 
 可能cocos creator编译后swift的文件并未添加到主工程中，此时需要手动创建一个swift文件，并自动创建bridge-header文件，删掉该swift文件后，把源swift文件勾选到目标target中，并在bridge-header文件中指明会被swift引用到oc头文件。
+
+## 运行问题
+
+cocos creator本身存在的bug，导致编译的shader相关文件会出现运行时崩溃，会出现诸如重复使用了某个location的错误。
+解决方案：
+```
+把会出现重复使用的location全部换掉
+如"location":6 和 对应的location = 6换成
+  "location":666 和对应的location = 666
+```
